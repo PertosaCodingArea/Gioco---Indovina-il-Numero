@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indovina il numero!!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Indovina il Numero</h1>
+  <p>Indovina il numero segreto tra 1 e 1000:</p>
+  <input type="text" id="guessInput">
+  <button onclick="checkGuess()">Indovina</button>
+  <div id="output"></div>
+
+  <script>
+    // Genera un numero casuale tra 1 e 100
+    var secretNumber = Math.floor(Math.random() * 1000) + 1;
+    var attempts = 0;
+
+    function checkGuess() {
+      var guess = parseInt(document.getElementById('guessInput').value);
+      var output = document.getElementById('output');
+
+      if (isNaN(guess) || guess < 1 || guess > 1000) {
+        output.innerHTML = 'Inserisci un numero valido tra 1 e 1000.';
+      } else {
+        attempts++;
+        if (guess === secretNumber) {
+          output.innerHTML = 'Congratulazioni! Hai indovinato il numero ' + secretNumber + ' in ' + attempts + ' tentativi.';
+          output.style.color = 'green';
+          document.getElementById('guessInput').disabled = true;
+        } else if (guess < secretNumber) {
+          output.innerHTML = 'SBAGLIATO!! Il numero è più grande';
+          output.style.color = 'red';
+        } else {
+          output.innerHTML = 'EIHHHHHHH!!! Il numero è più piccolo!! RIDUCILO!!';
+          output.style.color = 'red';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
